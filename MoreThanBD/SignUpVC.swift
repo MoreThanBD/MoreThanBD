@@ -16,6 +16,15 @@ class SignUpVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func goToHomeScreen(){
+        //after validation,call this function to make the Explore Page the rootViewController
+        let homeTabVarViewController=storyboard?.instantiateViewController(identifier: "Home") as! myTabController
+        
+        //homeTabVarViewController.username="username"
+        
+        view.window?.rootViewController=homeTabVarViewController
+        view.window?.makeKeyAndVisible()
+    }
 
     /*
     // MARK: - Navigation
