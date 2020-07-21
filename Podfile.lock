@@ -1,0 +1,29 @@
+PODS:
+  - Cosmos (22.1.0)
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
+
+DEPENDENCIES:
+  - Cosmos
+  - GoogleMaps
+  - GooglePlaces
+
+SPEC REPOS:
+  trunk:
+    - Cosmos
+    - GoogleMaps
+    - GooglePlaces
+
+SPEC CHECKSUMS:
+  Cosmos: 2795b36ad4bbea1af3050d6d65576ed63875f86a
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
+
+PODFILE CHECKSUM: aaa9efacb6733aa86cf4fc7e3d3fe2148a03da5b
+
+COCOAPODS: 1.9.3
