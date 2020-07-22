@@ -10,10 +10,39 @@ import UIKit
 
 class LogInVC: UIViewController {
 
+    
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func didTapLoginButton(_ sender: Any) {
+        let loginManager = FirebaseAuthManager()
+        
+        guard let email = emailField.text, let password = passwordField.text else {
+            return
+        }
+        
+        loginManager.signIn(email: email, password: password) {[weak self] (success) in
+            guard let `self` = self else {return}
+            var message: String = ""
+            if(success){
+                message = "User successfully logged in"
+                self.goToHomeScreen()
+            }
+            else{
+                message = "There was an error"
+            }
+            
+            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            //self.present(alertController, animated: true, completion: nil)
+            
+        }
     }
     
     func goToHomeScreen(){

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4FDF8940398278619D953D44 /* Pods_MoreThanBD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B45BE845D761BA97BBFDFD9 /* Pods_MoreThanBD.framework */; };
+		725A036324C7892300B83C37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 725A036224C7892300B83C37 /* GoogleService-Info.plist */; };
+		725A036524C80EFB00B83C37 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */; };
 		C0DFCAEA24C5F76E004DF240 /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFCAE924C5F76E004DF240 /* PlaceListViewController.swift */; };
 		C0DFCAF024C5F87C004DF240 /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFCAEE24C5F87C004DF240 /* PlaceTableViewCell.swift */; };
 		C0DFCAF124C5F87C004DF240 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0DFCAEF24C5F87C004DF240 /* PlaceTableViewCell.xib */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		175A32E3DDE956A2278DF094 /* Pods-MoreThanBD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoreThanBD.release.xcconfig"; path = "Target Support Files/Pods-MoreThanBD/Pods-MoreThanBD.release.xcconfig"; sourceTree = "<group>"; };
 		5B45BE845D761BA97BBFDFD9 /* Pods_MoreThanBD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoreThanBD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		725A036224C7892300B83C37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		C0DFCAE924C5F76E004DF240 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		C0DFCAEE24C5F87C004DF240 /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
 		C0DFCAEF24C5F87C004DF240 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EE0E724C3343F0090C180 /* AppDelegate.swift */,
+				725A036224C7892300B83C37 /* GoogleService-Info.plist */,
 				E08EE0E924C3343F0090C180 /* SceneDelegate.swift */,
 				E08EE0EB24C3343F0090C180 /* ViewController.swift */,
 				C0DFCAF724C66528004DF240 /* Helpers */,
@@ -165,6 +170,7 @@
 				E08EE10A24C344AD0090C180 /* FavoriteVC.swift */,
 				E00EFCD124C6C2B600C4424D /* DetailedVCImageCell.swift */,
 				E00EFCD524C71BD400C4424D /* myTabController.swift */,
+				725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */,
 			);
 			path = MoreThanBD;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				E08EE0EF24C3343F0090C180 /* Main.storyboard in Resources */,
 				C0DFCAF624C60A70004DF240 /* PlaceReviewTableViewCell.xib in Resources */,
 				C0DFCAF124C5F87C004DF240 /* PlaceTableViewCell.xib in Resources */,
+				725A036324C7892300B83C37 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +325,7 @@
 				C0DFCAF924C6653E004DF240 /* GoogleAPIHelper.swift in Sources */,
 				C0DFCAFB24C6656B004DF240 /* GoogleAPIHelper+Nearby.swift in Sources */,
 				E00EFCD624C71BD400C4424D /* myTabController.swift in Sources */,
+				725A036524C80EFB00B83C37 /* FirebaseAuthManager.swift in Sources */,
 				E08EE0E824C3343F0090C180 /* AppDelegate.swift in Sources */,
 				E08EE10324C335280090C180 /* LogInVC.swift in Sources */,
 				E08EE0EA24C3343F0090C180 /* SceneDelegate.swift in Sources */,

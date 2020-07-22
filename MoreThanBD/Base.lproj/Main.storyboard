@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IWu-ly-pwq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hg7-yf-Tsi">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -87,6 +87,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75c-gI-3ux">
                                         <rect key="frame" x="0.0" y="100" width="295" height="50"/>
                                         <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="didTapLoginButton:" destination="YSS-kx-dTI" eventType="touchUpInside" id="p9o-wU-BtH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imU-HK-wBg">
                                         <rect key="frame" x="0.0" y="150" width="295" height="50"/>
@@ -109,6 +112,10 @@
                         <viewLayoutGuide key="safeArea" id="u8l-w2-9uu"/>
                     </view>
                     <navigationItem key="navigationItem" id="Apc-dJ-Et8"/>
+                    <connections>
+                        <outlet property="emailField" destination="YAF-ck-S1u" id="12f-7e-yFj"/>
+                        <outlet property="passwordField" destination="yX6-HK-3mV" id="DGg-GG-05p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z88-5c-xur" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,6 +148,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0J-9O-pht">
                                         <rect key="frame" x="0.0" y="100" width="295" height="50"/>
                                         <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="didTapSignUpButton:" destination="n5j-16-GNo" eventType="touchUpInside" id="q5f-xv-egG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -158,6 +168,10 @@
                         <viewLayoutGuide key="safeArea" id="YFs-Jk-5co"/>
                     </view>
                     <navigationItem key="navigationItem" id="3yx-0W-xmT"/>
+                    <connections>
+                        <outlet property="emailField" destination="CoG-nb-OnZ" id="Vhs-V5-Pfw"/>
+                        <outlet property="passwordField" destination="ydC-Qf-kVN" id="HCX-kd-QO8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IOr-dK-4SH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

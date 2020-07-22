@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class StartVC: UIViewController {
 
     @IBOutlet weak var signUp_btn: UIButton!
     @IBOutlet weak var logIn_btn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
 
     /*
     // MARK: - Navigation

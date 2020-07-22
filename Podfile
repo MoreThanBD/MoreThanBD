@@ -10,4 +10,8 @@ target 'MoreThanBD' do
   pod 'GooglePlaces'
   pod 'Cosmos'
   pod "BSImagePicker"
+  pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
 end
