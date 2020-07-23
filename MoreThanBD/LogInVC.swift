@@ -54,8 +54,6 @@ class LogInVC: UIViewController {
         view.window?.rootViewController=homeTabVarViewController
         view.window?.makeKeyAndVisible()
     }
-    
-
     /*
     // MARK: - Navigation
 

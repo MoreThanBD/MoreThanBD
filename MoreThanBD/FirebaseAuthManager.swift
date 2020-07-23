@@ -50,4 +50,15 @@ class FirebaseAuthManager {
         
         return success
     }
+    
+    func resetPassword(email: String, completionBlock: @escaping (_ success: Bool) -> Void ) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if let error = error, let _ = AuthErrorCode(rawValue: error._code){
+                completionBlock(false)
+            }
+            else{
+                completionBlock(true)
+            }
+        }
+    }
 }

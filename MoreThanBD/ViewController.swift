@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import CoreLocation
+import FirebaseAuth
 
 struct Restaurant{
     var name:String?
@@ -22,6 +23,7 @@ struct Restaurant{
 class ViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addBtn: UIBarButtonItem!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     var locationManager: CLLocationManager?
     
     //an array of restaurants that will be pinned on the map
@@ -96,6 +98,19 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func logoutUser(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            
+            let startNavController=storyboard?.instantiateViewController(identifier: "startNavController") as! UINavigationController
+            
+            view.window?.rootViewController = startNavController
+            view.window?.makeKeyAndVisible()
+        }
+        catch let error{
+            print("Logout failed", error)
+        }
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -208,6 +223,7 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         
         return true;
     }
+    
     
     
 }

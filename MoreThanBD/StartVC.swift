@@ -16,10 +16,30 @@ class StartVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        authenticateAndConfigureWindow()
+    }
 
+    func authenticateAndConfigureWindow() {
+        if Auth.auth().currentUser != nil{
+            goToHomeScreen()
+        }
+    }
+    
+    func goToHomeScreen(){
+        //after validation,call this function to make the Explore Page the rootViewController
+        let homeTabVarViewController=storyboard?.instantiateViewController(identifier: "Home") as! myTabController
+        
+        
+        //homeTabVarViewController.username="username"
+        view.window?.rootViewController=homeTabVarViewController
+        view.window?.makeKeyAndVisible()
+        
+    }
+    
     /*
     // MARK: - Navigation
 

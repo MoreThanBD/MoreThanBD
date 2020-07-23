@@ -12,20 +12,28 @@ class SignUpVC: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var emailWarningLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
-    
     @IBAction func didTapSignUpButton(_ sender: Any) {
         let signUpManager = FirebaseAuthManager()
+        let isWustlEmail = validateEmail()
+        
+        if !isWustlEmail{
+            emailWarningLabel.isHidden = false
+            return
+        }
+        else{
+            emailWarningLabel.isHidden = true
+        }
+        
+        
         if let email = emailField.text, let password = passwordField.text {
-            print("email: \(email)")
-            print("password: \(password)")
             signUpManager.createUser(email: email, password: password) {[weak self] (success) in
                 guard let `self` = self else {return}
                 var message: String = ""
@@ -52,6 +60,16 @@ class SignUpVC: UIViewController {
         
         view.window?.rootViewController=homeTabVarViewController
         view.window?.makeKeyAndVisible()
+    }
+    
+    func validateEmail() -> Bool {
+        guard let email = emailField.text else{
+            return false
+        }
+        
+        let wustlRegex = "[A-Z0-9a-z._%+-]+@wustl.edu"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", wustlRegex)
+        return emailPred.evaluate(with: email)
     }
 
     /*
