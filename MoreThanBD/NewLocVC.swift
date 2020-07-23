@@ -9,18 +9,26 @@
 import UIKit
 import BSImagePicker
 import Photos
+import FirebaseStorage
+import FirebaseFirestore
+import FirebaseAuth
+import GooglePlaces
+import Cosmos
 
 class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var locationTitleLabel: UILabel!
+    @IBOutlet weak var starsCosmosView: CosmosView!
     @IBOutlet weak var uploadImageBtn: UIButton!
     var parentScene:UIViewController?
     var name:String?
     var uploadedImages:[UIImage]=[]
+    var uploadedImagesUrl: [String] = []
     var selectedAssets=[PHAsset]()
     var comment:String?
+    var place: GMSPlace?
 
     @IBOutlet weak var textView: UITextView!//recommendation
-    @IBOutlet weak var placeName: UITextField!
     
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
@@ -96,7 +104,8 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        placeName.text=name
+        //placeName.text=name
+        locationTitleLabel.text = place?.name
     }
     
     
@@ -109,17 +118,37 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func pushData(){
-        //push data to firebase(including images, comments, ratings and relative fields)
+        if let placeID = place?.placeID {
+            for (index, image) in uploadedImages.enumerated() {
+                let storageRef = Storage.storage().reference().child("places").child(placeID).child("image-\(index)")
+                if let imageData = image.jpegData(compressionQuality: 0.75) {
+                    storageRef.putData(imageData, metadata: nil) {[weak self] (meta, error) in
+                        if error == nil {
+                            storageRef.downloadURL { (url, error) in
+                                if let urlString = url?.absoluteString {
+                                    self?.uploadedImagesUrl.append(urlString)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func uploadData() {
+        guard let userId = Auth.auth().currentUser?.uid, let placeId = place?.placeID else { return }
+        let placeData: [String: Any] = [
+            "name": place?.name ?? "",
+            "stars": starsCosmosView.rating,
+            "review": textView.text ?? ""
+        ]
+        
+        let placesRef = Firestore.firestore().collection("reviews").document(placeId).collection("userreview").addDocument(data: placeData) { (error) in
+            if error == nil {
+                print("UPloaded Review...")
+            }
+        }
+        
     }
-    */
-
 }

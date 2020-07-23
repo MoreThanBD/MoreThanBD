@@ -151,11 +151,20 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         //call loadPins to reload pins
         loadPins()
         
+        /*
         //load the NewLocVC
         let NVC =  storyboard?.instantiateViewController(withIdentifier: "NewPlaceVC") as! NewLocVC
         NVC.name=place.name
+        NVC.place = place
         navigationItem.title=place.name
-        navigationController?.pushViewController(NVC, animated: true)
+        navigationController?.pushViewController(NVC, animated: true)*/
+        
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(identifier: "DetailedVC") as! DetailedVC
+        detailVC.place = place
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

@@ -14,12 +14,22 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var reviewsTableView: UITableView!
-    var images:[UIImage]=[]
+    @IBOutlet weak var bigImageView: UIImageView!
+    
+    var place: GMSPlace?
+    
+    var images:[UIImage?]=[]
+    
+    var placeId: String?
+    private var placesClient: GMSPlacesClient!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setUpCollectionView()
+
+        placesClient = GMSPlacesClient.shared()
+        fetchImages()
         
         /*
         DispatchQueue.global(qos: .userInitiated).async {
@@ -33,6 +43,50 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
  */
     }
     
+    func fetchImages() {
+        let placeFields = GMSPlaceField(rawValue:
+          GMSPlaceField.name.rawValue | GMSPlaceField.formattedAddress.rawValue
+        )!
+        
+        //"ChIJH8JwWVlbCogRgDGgMO6tcmY"
+        
+        /* placesClient?.fetchPlace(fromPlaceID: "ChIJH8JwWVlbCogRgDGgMO6tcmY",
+                                 placeFields: placeFields,
+                                 sessionToken: nil, callback: {
+          (place: GMSPlace?, error: Error?) in
+          if let error = error {
+            print("An error occurred: \(error.localizedDescription)")
+            return
+          } */
+          if let place = place {
+            // Get the metadata for the first photo in the place photo metadata list.
+            let photoMetadata: GMSPlacePhotoMetadata = place.photos![0]
+
+            // Call loadPlacePhoto to display the bitmap and attribution.
+            for (index, imageMetadata) in place.photos!.enumerated() {
+                self.placesClient?.loadPlacePhoto(imageMetadata, callback: { (photo, error) -> Void in
+                  if let error = error {
+                    // TODO: Handle the error.
+                    print("Error loading photo metadata: \(error.localizedDescription)")
+                    return
+                  } else {
+                    // Display the first image and its attributions.
+                    if index == 0 {
+                        self.bigImageView?.image = photo;
+                    } else {
+                        self.images.append(photo)
+                        self.imageCollectionView.reloadData()
+                    }
+                    //self.lblText?.attributedText = photoMetadata.attributions;
+                  }
+                })
+                
+            }
+            
+          }
+        //})
+    }
+    
     func setupTableView() {
         reviewsTableView.dataSource = self
         reviewsTableView.delegate = self
@@ -43,10 +97,6 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
         imageCollectionView.dataSource=self
         imageCollectionView.delegate=self
         //imageCollectionView.register(DetailedVCImageCell.self, forCellWithReuseIdentifier: "imageCollection")
-    }
-    
-    func fetchImages(){
-        //this function will be written to fetch images from api?
     }
 }
 
@@ -77,15 +127,16 @@ extension DetailedVC {
 
 extension DetailedVC:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return images.count
-        return 10
+        return images.count
+        //return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollection", for: indexPath) as! DetailedVCImageCell
-        let image=UIImage(named: "Image")
-        //cell.imageView.image=image
-        cell.backgroundColor = .blue
+        // let image=UIImage(named: "Image")
+        let image = images[indexPath.item]
+        cell.imageView.image=image
+        //cell.backgroundColor = .blue
         return cell
     }
     
