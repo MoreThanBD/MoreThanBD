@@ -538,6 +538,9 @@
                                     <constraint firstAttribute="height" constant="50" id="f3w-XH-kyi"/>
                                 </constraints>
                                 <state key="normal" title="Add Comment"/>
+                                <connections>
+                                    <action selector="addComment:" destination="olU-yz-aJ0" eventType="touchUpInside" id="g0L-0D-eFB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -573,7 +576,7 @@
         <!--Add CommentVC-->
         <scene sceneID="lib-XL-ZDO">
             <objects>
-                <viewController id="DNB-a0-A9U" customClass="AddCommentVC" customModule="MoreThanBD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addCommentVC" id="DNB-a0-A9U" customClass="AddCommentVC" customModule="MoreThanBD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hyZ-sS-Rji">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -35,6 +35,10 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
         fetchImages()
         fetchReviews()
     }
+    @IBAction func addComment(_ sender: Any) {
+        let addComment=storyboard?.instantiateViewController(identifier: "addCommentVC") as! AddCommentVC
+        navigationController?.pushViewController(addComment, animated: true)
+        }
     
     func fetchReviews() {
         guard let placeId = placeId else { return }
