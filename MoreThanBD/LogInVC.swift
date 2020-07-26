@@ -10,6 +10,8 @@ import UIKit
 
 class LogInVC: UIViewController {
 
+    @IBOutlet weak var logIn_btn: UIButton!
+    @IBOutlet weak var forgetPassword_btn: UIButton!
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -18,6 +20,15 @@ class LogInVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setStyle()
+    }
+    
+    func setStyle(){
+        logIn_btn.layer.cornerRadius=15;
+        logIn_btn.layer.backgroundColor=UIColor.systemGray6.cgColor
+        
+        forgetPassword_btn.layer.cornerRadius=15;
+        forgetPassword_btn.layer.backgroundColor=UIColor.systemGray6.cgColor
     }
     
     @IBAction func didTapLoginButton(_ sender: Any) {

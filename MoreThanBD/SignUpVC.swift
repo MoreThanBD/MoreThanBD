@@ -11,7 +11,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class SignUpVC: UIViewController {
-
+    @IBOutlet weak var signIn_btn: UIStackView!
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var nameField: UITextField!
@@ -21,6 +22,12 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setStyle()
+    }
+    
+    func setStyle(){
+        signIn_btn.layer.cornerRadius=15;
+        signIn_btn.layer.backgroundColor=UIColor.systemGray6.cgColor
     }
     
     @IBAction func didTapSignUpButton(_ sender: Any) {

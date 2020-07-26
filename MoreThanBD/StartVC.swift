@@ -18,6 +18,14 @@ class StartVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setStyle()
+    }
+    func setStyle(){
+        signUp_btn.layer.cornerRadius=15;
+        signUp_btn.layer.backgroundColor=UIColor.systemGray6.cgColor
+        
+        logIn_btn.layer.cornerRadius=15;
+        logIn_btn.layer.backgroundColor=UIColor.systemGray6.cgColor
     }
     
     override func viewDidAppear(_ animated: Bool) {

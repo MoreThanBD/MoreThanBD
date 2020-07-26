@@ -9,7 +9,7 @@
 import UIKit
 
 class PlaceReviewTableViewCell: UITableViewCell {
-    
+    var review:Review?
     static let NIB_NAME = "PlaceReviewTableViewCell"
     override func awakeFromNib() {
         super.awakeFromNib()

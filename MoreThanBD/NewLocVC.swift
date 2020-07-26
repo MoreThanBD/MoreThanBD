@@ -15,11 +15,15 @@ import FirebaseAuth
 import GooglePlaces
 import Cosmos
 
-class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
     
     @IBOutlet weak var locationTitleLabel: UILabel!
     @IBOutlet weak var starsCosmosView: CosmosView!
     @IBOutlet weak var uploadImageBtn: UIButton!
+    
+    @IBOutlet weak var theTextView: UITextView!
+    @IBOutlet weak var addPlaceBtn: UIButton!
+    
     var parentScene:UIViewController?
     var name:String?
     var uploadedImages:[UIImage]=[]
@@ -32,6 +36,8 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
+    @IBOutlet weak var imageView3: UIImageView!
+    @IBOutlet weak var imageView4: UIImageView!
     
     @IBAction func addNewPlace(_ sender: Any) {
         if textView.text != ""{
@@ -49,10 +55,10 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     
     @IBAction func choosePicture(_ sender: Any) {
         
-        let vc = BSImagePickerViewController()
-        vc.settings.maxNumberOfSelections=2//choose no more than 2 photos
+        let vc = ImagePickerController()
+        vc.settings.selection.max=4//choose no more than 4 photos
 
-        bs_presentImagePickerController(vc, animated: true,
+        presentImagePicker(vc, animated: true,
             select: { (asset: PHAsset) -> Void in
               // User selected an asset.
               // Do something with it, start upload perhaps?
@@ -99,6 +105,12 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
             if uploadedImages.count>1{
                 imageView2.image=uploadedImages[1]
             }
+            if uploadedImages.count>2{
+                imageView3.image=uploadedImages[2]
+            }
+            if uploadedImages.count==4{
+                imageView4.image=uploadedImages[3]
+            }
         }
     }
     
@@ -107,16 +119,51 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
 
         // Do any additional setup after loading the view.
         //placeName.text=name
+        textView.delegate=self
+
         locationTitleLabel.text = place?.name
+        setStyle()
+    }
+    func setStyle(){
+        textView.text = "Click here to add some comment"
+        textView.textColor = UIColor.lightGray
+        
+        addPlaceBtn.layer.cornerRadius=15;
+        addPlaceBtn.layer.backgroundColor=UIColor.systemGray6.cgColor
+        
+        uploadImageBtn.layer.cornerRadius=15;
+        uploadImageBtn.layer.backgroundColor=UIColor.systemGray6.cgColor
+        
+        theTextView.layer.cornerRadius=20
+        theTextView.layer.backgroundColor=UIColor.systemGray6.cgColor
+        
+        imageView1.layer.borderWidth=2
+        imageView1.layer.cornerRadius=15
+        imageView1.layer.borderColor=UIColor.systemGray6.cgColor
+        imageView2.layer.borderWidth=2
+        imageView2.layer.cornerRadius=15
+        imageView2.layer.borderColor=UIColor.systemGray6.cgColor
+        imageView3.layer.borderWidth=2
+        imageView3.layer.cornerRadius=15
+        imageView3.layer.borderColor=UIColor.systemGray6.cgColor
+        imageView4.layer.borderWidth=2
+        imageView4.layer.cornerRadius=15
+        imageView4.layer.borderColor=UIColor.systemGray6.cgColor
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
 
         dismiss(animated: true)
-        imageView1.image=image
-        uploadedImages.append(image)
+        //imageView1.image=image
+        //uploadedImages.append(image)
     }
     
     func pushData(){
