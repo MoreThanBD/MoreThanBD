@@ -38,10 +38,12 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
             comment=textView.text
             //push data to firebase
             pushData()
-            
-            //go back to parent
-            self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func goBack() {
+        //go back to parent
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -119,14 +121,29 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     
     func pushData(){
         if let placeID = place?.placeID {
-            for (index, image) in uploadedImages.enumerated() {
-                let storageRef = Storage.storage().reference().child("places").child(placeID).child("image-\(index)")
-                if let imageData = image.jpegData(compressionQuality: 0.75) {
-                    storageRef.putData(imageData, metadata: nil) {[weak self] (meta, error) in
-                        if error == nil {
-                            storageRef.downloadURL { (url, error) in
-                                if let urlString = url?.absoluteString {
-                                    self?.uploadedImagesUrl.append(urlString)
+            if uploadedImages.count == 0 {
+                self.uploadData { (completed) in
+                    if(completed) {
+                        self.goBack()
+                    }
+                }
+            } else {
+                for (index, image) in uploadedImages.enumerated() {
+                    let storageRef = Storage.storage().reference().child("places").child(placeID).child("image-\(index)")
+                    if let imageData = image.jpegData(compressionQuality: 0.75) {
+                        storageRef.putData(imageData, metadata: nil) {[weak self] (meta, error) in
+                            if error == nil {
+                                storageRef.downloadURL { (url, error) in
+                                    if let urlString = url?.absoluteString {
+                                        self?.uploadedImagesUrl.append(urlString)
+                                    }
+                                    if index == (self?.uploadedImages.count ?? 0) - 1 {
+                                        self?.uploadData { (completed) in
+                                            if(completed) {
+                                                self?.goBack()
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -136,19 +153,66 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
         }
     }
     
-    func uploadData() {
-        guard let userId = Auth.auth().currentUser?.uid, let placeId = place?.placeID else { return }
-        let placeData: [String: Any] = [
-            "name": place?.name ?? "",
+    func uploadData(completion: @escaping (Bool) -> Void) {
+        guard let userId = Auth.auth().currentUser?.uid, let place = self.place, let placeId = place.placeID else { return }
+        
+        let reviewData: [String: Any] = [
+            "name": place.name ?? "",
             "stars": starsCosmosView.rating,
-            "review": textView.text ?? ""
+            "review": textView.text ?? "",
+            "reviewerName": AppData.userName ?? "",
+            "reviewerId": userId,
+            "images": self.uploadedImagesUrl
         ]
         
-        let placesRef = Firestore.firestore().collection("reviews").document(placeId).collection("userreview").addDocument(data: placeData) { (error) in
+        var placeData: [String: Any] = [
+            "name": place.name ?? "",
+            "lng": place.coordinate.longitude,
+            "lat": place.coordinate.latitude,
+            "placeId": placeId,
+            "placeImage": uploadedImagesUrl.first ?? ""
+        ]
+        
+        placeData["userreviews"] = FieldValue.arrayUnion([reviewData])
+        Firestore.firestore().collection("reviews").document(placeId).setData(placeData, merge: true) { (error) in
             if error == nil {
-                print("UPloaded Review...")
+                completion(true)
+            } else {
+                completion(false)
             }
         }
         
+        
+        /*
+        
+        Firestore.firestore().collection("reviews").document(placeId).updateData(["userreviews" : FieldValue.arrayUnion([reviewData])]) { (error) in
+            if error == nil {
+                print("UPloaded Review...")
+                Firestore.firestore().collection("reviews").document(placeId).setData(placeData)
+                completion(true)
+            } else if error!.localizedDescription.contains("No document to update") {
+                placeData["userreviews"] = FieldValue.arrayUnion([reviewData])
+                Firestore.firestore().collection("reviews").document(placeId).setData(placeData) { (error) in
+                    if error == nil {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }
+            }
+        }
+ 
+ */
+       /*
+        Firestore.firestore().collection("reviews").document(placeId).collection("userreviews").document(userId).setData(reviewData) { (error) in
+            if error == nil {
+                print("UPloaded Review...")
+                Firestore.firestore().collection("reviews").document(placeId).setData(placeData)
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }*/
     }
 }
+

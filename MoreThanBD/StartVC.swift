@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class StartVC: UIViewController {
 
@@ -25,7 +26,18 @@ class StartVC: UIViewController {
 
     func authenticateAndConfigureWindow() {
         if Auth.auth().currentUser != nil{
+            getUserName()
             goToHomeScreen()
+        }
+    }
+    
+    func getUserName() {
+        if let userId = Auth.auth().currentUser?.uid {
+            Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
+                let userObj = snapshot?.data() ?? [:]
+                let name = userObj["name"] as? String
+                AppData.userName = name
+            }
         }
     }
     

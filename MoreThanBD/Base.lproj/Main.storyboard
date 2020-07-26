@@ -122,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z88-5c-xur" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-548" y="-230"/>
+            <point key="canvasLocation" x="102" y="-231"/>
         </scene>
         <!--Password ResetVC-->
         <scene sceneID="id7-1a-Tzs">
@@ -157,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXv-m9-UzB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="377" y="-229"/>
+            <point key="canvasLocation" x="1052" y="-231"/>
         </scene>
         <!--Sign UpVC-->
         <scene sceneID="Sqp-zF-aWf">
@@ -168,7 +168,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xoY-hh-le1">
-                                <rect key="frame" x="40" y="328" width="295" height="150"/>
+                                <rect key="frame" x="40" y="278" width="295" height="200"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CoG-nb-OnZ">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
@@ -183,8 +183,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0J-9O-pht">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-BN-WRE">
                                         <rect key="frame" x="0.0" y="100" width="295" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="iTR-wO-91M"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0J-9O-pht">
+                                        <rect key="frame" x="0.0" y="150" width="295" height="50"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
                                             <action selector="didTapSignUpButton:" destination="n5j-16-GNo" eventType="touchUpInside" id="q5f-xv-egG"/>
@@ -197,7 +205,7 @@
                                 </constraints>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please make sure your email is a valid WashU email." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vJ-Cd-4aM">
-                                <rect key="frame" x="40" y="269" width="295" height="51"/>
+                                <rect key="frame" x="40" y="204" width="295" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -216,6 +224,7 @@
                     <connections>
                         <outlet property="emailField" destination="CoG-nb-OnZ" id="Vhs-V5-Pfw"/>
                         <outlet property="emailWarningLabel" destination="3vJ-Cd-4aM" id="QKI-rd-aff"/>
+                        <outlet property="nameField" destination="dEY-BN-WRE" id="Vo9-Ju-pbz"/>
                         <outlet property="passwordField" destination="ydC-Qf-kVN" id="HCX-kd-QO8"/>
                     </connections>
                 </viewController>
@@ -290,8 +299,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7T3-u7-IKc">
-                                <rect key="frame" x="0.0" y="72.666666666666671" width="375" height="210.33333333333331"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7T3-u7-IKc">
+                                <rect key="frame" x="0.0" y="74" width="375" height="209"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -329,6 +338,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhW-Td-YmW" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="0.0" y="283" width="375" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="q1h-Xu-1a3"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="starSize">
                                         <real key="value" value="60"/>
@@ -336,7 +348,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Macdonald's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbE-NJ-PCc">
-                                <rect key="frame" x="0.0" y="44" width="375" height="28.666666666666671"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Zi4-d5-Pa2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -352,7 +367,8 @@
                             <constraint firstItem="Df2-zZ-HBj" firstAttribute="trailing" secondItem="WhW-Td-YmW" secondAttribute="trailing" id="GA8-DR-i1Q"/>
                             <constraint firstItem="Df2-zZ-HBj" firstAttribute="trailing" secondItem="GbE-NJ-PCc" secondAttribute="trailing" id="Kfq-Wg-kBh"/>
                             <constraint firstItem="LkU-tw-Nmj" firstAttribute="top" secondItem="xcs-3N-ph6" secondAttribute="bottom" constant="22" id="NDy-Sw-K4j"/>
-                            <constraint firstItem="xcs-3N-ph6" firstAttribute="top" secondItem="7T3-u7-IKc" secondAttribute="bottom" constant="100" id="UH4-wu-GVA"/>
+                            <constraint firstItem="7T3-u7-IKc" firstAttribute="leading" secondItem="Df2-zZ-HBj" secondAttribute="leading" id="PIG-w4-ia0"/>
+                            <constraint firstItem="7T3-u7-IKc" firstAttribute="trailing" secondItem="Df2-zZ-HBj" secondAttribute="trailing" id="Urq-zI-I4b"/>
                             <constraint firstItem="7T3-u7-IKc" firstAttribute="top" secondItem="GbE-NJ-PCc" secondAttribute="bottom" id="WNL-1J-JsA"/>
                             <constraint firstItem="xcs-3N-ph6" firstAttribute="centerX" secondItem="Df2-zZ-HBj" secondAttribute="centerX" id="WcF-6C-qNZ"/>
                             <constraint firstItem="Df2-zZ-HBj" firstAttribute="bottom" secondItem="xcs-3N-ph6" secondAttribute="bottom" constant="201" id="Yfm-WW-nxt"/>

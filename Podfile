@@ -15,4 +15,5 @@ target 'MoreThanBD' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
+  pod 'SDWebImage', '~> 5.0'
 end

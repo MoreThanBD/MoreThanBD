@@ -8,31 +8,39 @@
 
 import FirebaseAuth
 import UIKit
+import FirebaseFirestore
 
 class FirebaseAuthManager {
     
-    func createUser(email: String, password: String, completionBlock: @escaping (_ success: Bool) -> Void){
+    func createUser(email: String, password: String, completionBlock: @escaping (_ success: Bool, _ user: User?) -> Void){
         Auth.auth().createUser(withEmail: email, password: password) {(authResult, error) in
             if let user = authResult?.user{
                 print(user)
-                completionBlock(true)
+                completionBlock(true, user)
             }
             else{
                 if let err = error{
                     print(err)
                 }
-                completionBlock(false)
+                completionBlock(false, nil)
             }
         }
     }
     
-    func signIn(email: String, password: String, completionBlock: @escaping (_ success: Bool) -> Void) {
+    func signIn(email: String, password: String, completionBlock: @escaping (_ success: Bool, _ user: User?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error, let _ = AuthErrorCode(rawValue: error._code) {
-                completionBlock(false)
+                completionBlock(false, nil)
             }
             else{
-                completionBlock(true)
+                if let user = result?.user {
+                    Firestore.firestore().collection("users").document(user.uid).getDocument { (snapshot, error) in
+                        let userObj = snapshot?.data() ?? [:]
+                        let name = userObj["name"] as? String ?? ""
+                        AppData.userName = name
+                    }
+                }
+                completionBlock(true, result?.user)
             }
         }
     }

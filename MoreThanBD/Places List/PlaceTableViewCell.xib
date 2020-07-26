@@ -19,12 +19,18 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0mZ-Yp-AkZ">
                         <rect key="frame" x="1" y="1" width="318" height="98"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vaq-hH-5N6">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vaq-hH-5N6">
                                 <rect key="frame" x="2" y="9" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="5dA-7q-1DK"/>
                                     <constraint firstAttribute="width" secondItem="Vaq-hH-5N6" secondAttribute="height" multiplier="1:1" id="gj8-62-SBj"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starbucks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRx-6i-dKB">
                                 <rect key="frame" x="86" y="21" width="77.5" height="21"/>
@@ -49,6 +55,9 @@
                                     <constraint firstAttribute="width" constant="120" id="5ZR-JN-gHu"/>
                                     <constraint firstAttribute="height" constant="30" id="nHx-Qv-L4D"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlT-SY-dpx">
                                 <rect key="frame" x="260" y="20" width="40" height="21"/>
@@ -84,6 +93,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="averageRatingLabel" destination="8bc-hP-YIf" id="MLw-bn-K2o"/>
+                <outlet property="distanceLabel" destination="mlT-SY-dpx" id="og3-ne-V1p"/>
+                <outlet property="nameLabel" destination="vRx-6i-dKB" id="8wk-WK-AGP"/>
+                <outlet property="placeImageView" destination="Vaq-hH-5N6" id="ouD-9u-fz1"/>
+                <outlet property="ratingView" destination="QpA-Ea-6in" id="h5P-6v-c2D"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="106.47321428571428"/>
         </tableViewCell>
     </objects>

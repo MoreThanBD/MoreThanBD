@@ -27,7 +27,7 @@ class LogInVC: UIViewController {
             return
         }
         
-        loginManager.signIn(email: email, password: password) {[weak self] (success) in
+        loginManager.signIn(email: email, password: password) {[weak self] (success, user) in
             guard let `self` = self else {return}
             var message: String = ""
             if(success){

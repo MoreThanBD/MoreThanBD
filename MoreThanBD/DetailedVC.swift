@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import FirebaseFirestore
 
 class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
 
@@ -17,10 +18,12 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var bigImageView: UIImageView!
     
     var place: GMSPlace?
+    var placeId: String?
+    
+    var reviews: [Review] = []
     
     var images:[UIImage?]=[]
     
-    var placeId: String?
     private var placesClient: GMSPlacesClient!
     
     override func viewDidLoad() {
@@ -30,40 +33,41 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
 
         placesClient = GMSPlacesClient.shared()
         fetchImages()
-        
-        /*
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.fetchImages()
-            DispatchQueue.main.async {
-                print("reloading")
-                self.imageCollectionView.reloadData()
+        fetchReviews()
+    }
+    
+    func fetchReviews() {
+        guard let placeId = placeId else { return }
+        Firestore.firestore().collection("reviews").document(placeId).getDocument {[weak self] (snapshot, error) in
+            if error == nil {
+                let placeObj = snapshot?.data() ?? [:]
+                let place = Place.placeFromDictionary(dict: placeObj)
+                self?.reviews = place.reviews ?? []
+                self?.reviewsTableView.reloadData()
             }
-
         }
- */
     }
     
     func fetchImages() {
-        let placeFields = GMSPlaceField(rawValue:
-          GMSPlaceField.name.rawValue | GMSPlaceField.formattedAddress.rawValue
-        )!
+        guard let placeId = placeId else { return }
+       
         
         //"ChIJH8JwWVlbCogRgDGgMO6tcmY"
         
-        /* placesClient?.fetchPlace(fromPlaceID: "ChIJH8JwWVlbCogRgDGgMO6tcmY",
-                                 placeFields: placeFields,
+        placesClient?.fetchPlace(fromPlaceID: placeId,
+                                 placeFields: .photos,
                                  sessionToken: nil, callback: {
           (place: GMSPlace?, error: Error?) in
           if let error = error {
             print("An error occurred: \(error.localizedDescription)")
             return
-          } */
+          }
           if let place = place {
             // Get the metadata for the first photo in the place photo metadata list.
-            let photoMetadata: GMSPlacePhotoMetadata = place.photos![0]
+            //let photoMetadata: GMSPlacePhotoMetadata = place.photos![0]
 
             // Call loadPlacePhoto to display the bitmap and attribution.
-            for (index, imageMetadata) in place.photos!.enumerated() {
+            for (index, imageMetadata) in (place.photos ?? []).enumerated() {
                 self.placesClient?.loadPlacePhoto(imageMetadata, callback: { (photo, error) -> Void in
                   if let error = error {
                     // TODO: Handle the error.
@@ -84,13 +88,14 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
             }
             
           }
-        //})
+        })
     }
     
     func setupTableView() {
         reviewsTableView.dataSource = self
         reviewsTableView.delegate = self
         reviewsTableView.register(UINib(nibName: PlaceReviewTableViewCell.NIB_NAME, bundle: nil), forCellReuseIdentifier: Constants.reviewCellId)
+        reviewsTableView.tableFooterView = UIView()
     }
     
     func setUpCollectionView(){
@@ -103,13 +108,14 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
 
 extension DetailedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reviewCellId, for: indexPath)
-        //cell.detailTextLabel
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reviewCellId, for: indexPath) as! PlaceReviewTableViewCell
+        let review = reviews[indexPath.row]
+        cell.review = review
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return reviews.count
     }
 }
 

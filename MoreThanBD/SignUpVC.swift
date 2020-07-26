@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class SignUpVC: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailWarningLabel: UILabel!
     
     
@@ -33,13 +36,13 @@ class SignUpVC: UIViewController {
         }
         
         
-        if let email = emailField.text, let password = passwordField.text {
-            signUpManager.createUser(email: email, password: password) {[weak self] (success) in
+        if let email = emailField.text, let password = passwordField.text, let name = nameField.text {
+            signUpManager.createUser(email: email, password: password) {[weak self] (success, user) in
                 guard let `self` = self else {return}
                 var message: String = ""
                 if(success) {
                     message = "User was successfully created"
-                    self.goToHomeScreen()
+                    self.addUserToDB(name: name, user: user)
                 }
                 else{
                     message = "There was an error"
@@ -48,6 +51,22 @@ class SignUpVC: UIViewController {
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 //self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func addUserToDB(name: String, user: User?) {
+        guard let userId = user?.uid else {
+            return
+        }
+        let userData = [
+            "name": name,
+            "id": userId
+        ]
+        Firestore.firestore().collection("users").document(userId).setData(userData) { (error) in
+            if error == nil {
+                AppData.userName = name
+                self.goToHomeScreen()
             }
         }
     }
@@ -71,15 +90,4 @@ class SignUpVC: UIViewController {
         let emailPred = NSPredicate(format: "SELF MATCHES %@", wustlRegex)
         return emailPred.evaluate(with: email)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
