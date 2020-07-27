@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         //conform to GMSMapViewDelegate for tapping on a marker
         mapView.delegate=self
         
+        
         /*
         DispatchQueue.global(qos: .userInitiated).async {
             self.loadRestaurants()//this function will load the restaurant's informationinto var places
@@ -55,17 +56,26 @@ class ViewController: UIViewController {
     func setupLocation() {
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
+        locationManager?.requestLocation()
         guard let coordinate = locationManager?.location?.coordinate else {
             return
         }
         
-        print(coordinate)
-        zoomToLocation(coordinate: coordinate)
+        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways) {
+            print("Permitted... ", locationManager?.location?.coordinate.latitude)
+            print("Permitted... ", locationManager?.location?.coordinate.longitude)
+        }
         
+        print(coordinate)
+        //zoomToLocation(coordinate: coordinate)
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed...", error.localizedDescription)
     }
     
     func zoomToLocation(coordinate: CLLocationCoordinate2D) {
-        let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 11)
+        let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 15)
         //mapView.camera = camera
         mapView.animate(to: camera)
         fetchRestaurants(around: coordinate)
@@ -80,13 +90,14 @@ class ViewController: UIViewController {
         gLocation.longitude = location.longitude
         
         input.destinationCoordinate = gLocation
-        GoogleApi.shared.callApi(.nearBy, input: input) { (response) in
+       /* GoogleApi.shared.callApi(.nearBy, input: input) { (response) in
             if let data = response.data as? [GApiResponse.NearBy], response.isValidFor(.nearBy){
                 for place in data {
-                    print("Place...: ", place.formattedAddress)
+                    //print("Place...: ", place.formattedAddress)
                 }
             }
         }
+         */
     }
     @IBAction func addLocation(_ sender: Any) {
         let acController = GMSAutocompleteViewController()
@@ -96,6 +107,12 @@ class ViewController: UIViewController {
     
     func loadRestaurants(){
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.description as? PlaceListViewController {
+            destination.currentLocation = locationManager?.location
+        }
     }
     
     @IBAction func logoutUser(_ sender: Any) {
@@ -115,6 +132,10 @@ class ViewController: UIViewController {
 
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        Place.currentLocation = locations.first
+        if let loc = locations.first {
+            zoomToLocation(coordinate: loc.coordinate)
+        }
         print("Updating... ", locations.first)
     }
     
@@ -129,6 +150,9 @@ extension ViewController: CLLocationManagerDelegate {
             print("Location Access Denied")
         case .authorizedAlways, .authorizedWhenInUse:
             guard let location = manager.location else { return }
+            //Place.currentLocation = locationManager?.location
+            print("Got here...", location.coordinate.latitude)
+            print("Got here...", location.coordinate.longitude)
             zoomToLocation(coordinate: location.coordinate)
         @unknown default:
             print("Default...")
@@ -171,7 +195,6 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         let NVC =  storyboard?.instantiateViewController(withIdentifier: "NewPlaceVC") as! NewLocVC
         NVC.name=place.name
         NVC.place = place
-        navigationItem.title=place.name
         navigationController?.pushViewController(NVC, animated: true)
         
         

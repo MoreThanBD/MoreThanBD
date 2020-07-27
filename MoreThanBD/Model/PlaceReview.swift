@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 struct Review {
     var placeName: String
@@ -30,7 +31,7 @@ struct Review {
 }
 
 struct Place {
-    var distanceAway: Int?
+    var distanceAway: Double?
     var placeImageString: String?
     var averageRating: Double?
     var name: String?
@@ -38,11 +39,12 @@ struct Place {
     var lat: Double?
     var placeId: String?
     var reviews: [Review]?
+    static var currentLocation: CLLocation?
     
     static func placeFromDictionary(dict: [String: Any]) -> Place {
         let name = dict["name"] as? String
-        let lng = dict["lng"] as? Double
-        let lat = dict["lat"] as? Double
+        let lng = dict["lng"] as? Double ?? 0
+        let lat = dict["lat"] as? Double ?? 0
         let placeImageString = dict["placeImage"] as? String
         let placeId = dict["placeId"] as? String
         
@@ -53,10 +55,25 @@ struct Place {
             return rev
         })
         
+        var distanceAway: Double = 0
+        
         let averageRating = totalScore / Double((reviews?.count ?? 1))
         
+        if let currentLocation = Self.currentLocation,
+            let latitude = CLLocationDegrees(exactly: lat),
+            let longitude = CLLocationDegrees(exactly: lng) {
+            let locationOfPlace = CLLocation(latitude: longitude, longitude: latitude)
+            
+            let distance = currentLocation.distance(from: locationOfPlace)
+            print("Distance... LAT", currentLocation.coordinate.latitude)
+            print("Distance... LNG", currentLocation.coordinate.longitude)
+            let distanceInMiles = distance * 0.000621371
+            distanceAway = distanceInMiles
+        }
         
-        let place = Place(distanceAway: 0, placeImageString: placeImageString, averageRating: averageRating, name: name, lng: lng, lat: lat, placeId: placeId, reviews: reviews)
+
+        //print("Distance... ", distanceAway)
+        let place = Place(distanceAway: distanceAway, placeImageString: placeImageString, averageRating: averageRating, name: name, lng: lng, lat: lat, placeId: placeId, reviews: reviews)
         return place
     }
 }

@@ -13,6 +13,7 @@
 		725A036724C9E91100B83C37 /* PasswordResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A036624C9E91100B83C37 /* PasswordResetVC.swift */; };
 		C037725524CB939C00C288F6 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037725424CB939C00C288F6 /* AppData.swift */; };
 		C037725724CCD0DA00C288F6 /* PlaceReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037725624CCD0DA00C288F6 /* PlaceReview.swift */; };
+		C037725924CF808E00C288F6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037725824CF808E00C288F6 /* BaseViewController.swift */; };
 		C0DFCAEA24C5F76E004DF240 /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFCAE924C5F76E004DF240 /* PlaceListViewController.swift */; };
 		C0DFCAF024C5F87C004DF240 /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFCAEE24C5F87C004DF240 /* PlaceTableViewCell.swift */; };
 		C0DFCAF124C5F87C004DF240 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0DFCAEF24C5F87C004DF240 /* PlaceTableViewCell.xib */; };
@@ -47,6 +48,7 @@
 		725A036624C9E91100B83C37 /* PasswordResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetVC.swift; sourceTree = "<group>"; };
 		C037725424CB939C00C288F6 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		C037725624CCD0DA00C288F6 /* PlaceReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceReview.swift; sourceTree = "<group>"; };
+		C037725824CF808E00C288F6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C0DFCAE924C5F76E004DF240 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		C0DFCAEE24C5F87C004DF240 /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
 		C0DFCAEF24C5F87C004DF240 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				C0DFCAF824C6653E004DF240 /* GoogleAPIHelper.swift */,
+				C037725824CF808E00C288F6 /* BaseViewController.swift */,
 				C0DFCAFC24C66581004DF240 /* NearByEnum.swift */,
 				C0DFCAFA24C6656B004DF240 /* GoogleAPIHelper+Nearby.swift */,
 			);
@@ -333,6 +336,7 @@
 				E08EE0FF24C334D80090C180 /* StartVC.swift in Sources */,
 				E08EE10B24C344AD0090C180 /* FavoriteVC.swift in Sources */,
 				725A036724C9E91100B83C37 /* PasswordResetVC.swift in Sources */,
+				C037725924CF808E00C288F6 /* BaseViewController.swift in Sources */,
 				E00EFCD224C6C2B600C4424D /* DetailedVCImageCell.swift in Sources */,
 				C0DFCAFD24C66581004DF240 /* NearByEnum.swift in Sources */,
 				C0DFCAF024C5F87C004DF240 /* PlaceTableViewCell.swift in Sources */,
@@ -496,13 +500,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z9CK5335AK;
+				DEVELOPMENT_TEAM = RTV93MWHFP;
 				INFOPLIST_FILE = MoreThanBD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.wustl.XiaowenMa.MoreThanBD;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.wustl.XiaowenMa.MoreThanB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -515,13 +519,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z9CK5335AK;
+				DEVELOPMENT_TEAM = RTV93MWHFP;
 				INFOPLIST_FILE = MoreThanBD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.wustl.XiaowenMa.MoreThanBD;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.wustl.XiaowenMa.MoreThanB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -24,7 +24,7 @@ class PlaceTableViewCell: UITableViewCell {
             guard let place = self.place else { return }
             nameLabel.text = place.name
             ratingView.rating = Double(place.averageRating ?? 0)
-            distanceLabel.text = "\(place.distanceAway ?? 0)"
+            distanceLabel.text = String(format: "%.1f mi", place.distanceAway ?? 0)
             averageRatingLabel.text = String(format: "%0.1f", place.averageRating ?? 0)
             if let imageUrlString = place.placeImageString, let url = URL(string: imageUrlString) {
                 placeImageView.sd_setImage(with: url, placeholderImage: nil)

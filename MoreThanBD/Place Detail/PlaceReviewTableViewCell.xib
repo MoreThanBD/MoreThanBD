@@ -68,6 +68,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="PUD-79-3iK"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hih-JJ-YFe">
                                 <rect key="frame" x="46" y="119.5" width="303" height="50"/>
@@ -142,6 +145,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="placeImageFourView" destination="cjM-se-Jx7" id="VcF-nd-tvD"/>
+                <outlet property="placeImageOneView" destination="DJM-7y-J05" id="ExI-TY-jTg"/>
+                <outlet property="placeImageThreeView" destination="27r-8J-rmx" id="pDs-nN-kGi"/>
+                <outlet property="placeImageTwoView" destination="rv7-Kf-GIx" id="oVy-Gf-RNr"/>
+                <outlet property="reviewLabel" destination="IQW-GD-0nY" id="BEV-jO-Q8Q"/>
+                <outlet property="reviewerName" destination="ldy-Vj-HJQ" id="wdf-PE-p1B"/>
+                <outlet property="starsCosmosView" destination="oGI-lB-9c8" id="lZ6-OV-Oqk"/>
+            </connections>
             <point key="canvasLocation" x="176.08695652173915" y="138.61607142857142"/>
         </tableViewCell>
     </objects>

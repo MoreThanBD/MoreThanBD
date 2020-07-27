@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 import FirebaseFirestore
 
 class PlaceListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var places: [Place] = []
+    var currentLocation: CLLocation?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -39,6 +41,7 @@ class PlaceListViewController: UIViewController {
                 for document in documents {
                     let placeData = document.data()
                     let place = Place.placeFromDictionary(dict: placeData)
+                    
                     places.append(place)
                 }
                 self?.places = places
