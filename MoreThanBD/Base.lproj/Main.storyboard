@@ -554,7 +554,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="D3l-Dk-ATk">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="vWn-nU-jb8">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="poX-tN-Xfj">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="poX-tN-Xfj">
                                 <rect key="frame" x="246" y="0.0" width="113" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
