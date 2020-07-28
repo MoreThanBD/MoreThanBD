@@ -158,6 +158,15 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
         }
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n"){
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
 

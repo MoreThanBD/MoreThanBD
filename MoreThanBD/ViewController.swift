@@ -51,6 +51,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         locationManager?.requestAlwaysAuthorization()
+        locationManager?.startUpdatingLocation()
     }
 
     func setupLocation() {

@@ -77,7 +77,7 @@
                                             <constraint firstAttribute="height" constant="50" id="mWj-Pe-B82"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yX6-HK-3mV">
                                         <rect key="frame" x="0.0" y="50" width="295" height="50"/>
@@ -188,7 +188,7 @@
                                             <constraint firstAttribute="height" constant="50" id="hvi-9n-f9Z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydC-Qf-kVN">
                                         <rect key="frame" x="0.0" y="50" width="295" height="50"/>
@@ -279,26 +279,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Explore" id="spG-se-xew">
-                        <barButtonItem key="leftBarButtonItem" id="6W0-b1-cIj">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IY9-al-ITV">
+                    <navigationItem key="navigationItem" title="Explore" id="88T-Qx-CKq">
+                        <barButtonItem key="leftBarButtonItem" id="qXa-qZ-Bkf">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7K8-r2-txk">
                                 <rect key="frame" x="16" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="logoutUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cnF-pM-N48"/>
+                                    <action selector="logoutUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qNw-Tc-T35"/>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ot1-hy-Jo0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TSr-6b-hD7">
                             <connections>
-                                <action selector="addLocation:" destination="BYZ-38-t0r" id="rig-ws-giW"/>
+                                <action selector="addLocation:" destination="BYZ-38-t0r" id="K3P-sP-x1i"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addBtn" destination="ot1-hy-Jo0" id="Khe-XC-09R"/>
-                        <outlet property="logoutButton" destination="6W0-b1-cIj" id="mP3-UH-dXX"/>
                         <outlet property="mapView" destination="FVZ-jr-lEb" id="UXI-MQ-OJo"/>
                     </connections>
                 </viewController>
@@ -673,7 +671,7 @@
         <!--Discover-->
         <scene sceneID="g7m-5M-TYZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yU8-EL-Zm7" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yU8-EL-Zm7" customClass="myNavController" customModule="MoreThanBD" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" id="xiF-Rd-fXk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ktb-qs-hJL">

@@ -28,7 +28,6 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Bundle.main.bundleIdentifier!)
         setupTableView()
         setUpCollectionView()
 

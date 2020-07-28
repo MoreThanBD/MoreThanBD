@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogInVC: UIViewController {
+class LogInVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var logIn_btn: UIButton!
     @IBOutlet weak var forgetPassword_btn: UIButton!
@@ -20,7 +20,14 @@ class LogInVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        emailField.delegate = self
+        passwordField.delegate = self
         setStyle()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
     
     func setStyle(){

@@ -16,7 +16,7 @@ class PlaceTableViewCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var placeImageView: UIImageView!
     @IBOutlet weak var averageRatingLabel: UILabel!
-    
+ 
     static let NIB_NAME = "PlaceTableViewCell"
     
     var place: Place? {

@@ -11,6 +11,7 @@
 		725A036324C7892300B83C37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 725A036224C7892300B83C37 /* GoogleService-Info.plist */; };
 		725A036524C80EFB00B83C37 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */; };
 		725A036724C9E91100B83C37 /* PasswordResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A036624C9E91100B83C37 /* PasswordResetVC.swift */; };
+		728FAA4F24D0BFAD0035E7CD /* myNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FAA4E24D0BFAD0035E7CD /* myNavController.swift */; };
 		C037725524CB939C00C288F6 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037725424CB939C00C288F6 /* AppData.swift */; };
 		C037725724CCD0DA00C288F6 /* PlaceReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037725624CCD0DA00C288F6 /* PlaceReview.swift */; };
 		C037725924CF808E00C288F6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037725824CF808E00C288F6 /* BaseViewController.swift */; };
@@ -46,6 +47,7 @@
 		725A036224C7892300B83C37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		725A036624C9E91100B83C37 /* PasswordResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetVC.swift; sourceTree = "<group>"; };
+		728FAA4E24D0BFAD0035E7CD /* myNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myNavController.swift; sourceTree = "<group>"; };
 		C037725424CB939C00C288F6 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		C037725624CCD0DA00C288F6 /* PlaceReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceReview.swift; sourceTree = "<group>"; };
 		C037725824CF808E00C288F6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				E00EFCD524C71BD400C4424D /* myTabController.swift */,
 				725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */,
 				725A036624C9E91100B83C37 /* PasswordResetVC.swift */,
+				728FAA4E24D0BFAD0035E7CD /* myNavController.swift */,
 			);
 			path = MoreThanBD;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				E00EFCD624C71BD400C4424D /* myTabController.swift in Sources */,
 				C037725724CCD0DA00C288F6 /* PlaceReview.swift in Sources */,
 				C037725524CB939C00C288F6 /* AppData.swift in Sources */,
+				728FAA4F24D0BFAD0035E7CD /* myNavController.swift in Sources */,
 				725A036524C80EFB00B83C37 /* FirebaseAuthManager.swift in Sources */,
 				E08EE0E824C3343F0090C180 /* AppDelegate.swift in Sources */,
 				E08EE10324C335280090C180 /* LogInVC.swift in Sources */,
@@ -500,7 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RTV93MWHFP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MoreThanBD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -519,7 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RTV93MWHFP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MoreThanBD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

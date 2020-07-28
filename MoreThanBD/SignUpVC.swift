@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class SignUpVC: UIViewController {
+class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signIn_btn: UIStackView!
     
     @IBOutlet weak var emailField: UITextField!
@@ -22,7 +22,15 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        emailField.delegate = self
+        passwordField.delegate = self
+        nameField.delegate = self
         setStyle()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
     
     func setStyle(){

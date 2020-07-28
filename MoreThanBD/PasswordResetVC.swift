@@ -8,13 +8,20 @@
 
 import UIKit
 
-class PasswordResetVC: UIViewController {
+class PasswordResetVC: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var emailField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
     
     @IBAction func resetPassword(_ sender: Any) {
