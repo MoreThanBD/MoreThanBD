@@ -8,10 +8,13 @@
 
 import UIKit
 import Cosmos
+import FirebaseStorage
 
 class PlaceReviewTableViewCell: UITableViewCell {
+    let storage = Storage.storage()
     
     @IBOutlet weak var reviewerName: UILabel!
+    @IBOutlet weak var reviewerIcon: UILabel!
     @IBOutlet weak var starsCosmosView: CosmosView!
     @IBOutlet weak var reviewLabel: UITextView!
     @IBOutlet weak var placeImageOneView: UIImageView!
@@ -45,6 +48,71 @@ class PlaceReviewTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setReviewInformation() {
+        guard let thisReview = review else{
+            print("No review")
+            return
+        }
+        
+        reviewerName.text = thisReview.reviewerName
+        reviewerIcon.text = String(thisReview.reviewerName.prefix(1))
+        starsCosmosView.rating = Double(thisReview.stars)
+        reviewLabel.text = thisReview.review
+        
+        //laod images off main thread to load the cell faster
+        if thisReview.images.count > 0{
+            let httpsReference = self.storage.reference(forURL: thisReview.images[0])
+            
+            httpsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error{
+                    print("Error with loading in iamge", error)
+                }
+                else{
+                    self.placeImageOneView.image = UIImage(data: data!)
+                }
+            }
+        }
+        
+        if thisReview.images.count > 1{
+            let httpsReference = self.storage.reference(forURL: thisReview.images[1])
+            
+            httpsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error{
+                    print("Error with loading in iamge", error)
+                }
+                else{
+                    self.placeImageTwoView.image = UIImage(data: data!)
+                }
+            }
+        }
+            
+        if thisReview.images.count > 2{
+            let httpsReference = self.storage.reference(forURL: thisReview.images[2])
+            
+            httpsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error{
+                    print("Error with loading in iamge", error)
+                }
+                else{
+                    self.placeImageThreeView.image = UIImage(data: data!)
+                }
+            }
+        }
+        
+        if thisReview.images.count > 3{
+            let httpsReference = self.storage.reference(forURL: thisReview.images[3])
+            
+            httpsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error{
+                    print("Error with loading in iamge", error)
+                }
+                else{
+                    self.placeImageFourView.image = UIImage(data: data!)
+                }
+            }
+        }
     }
     
 }

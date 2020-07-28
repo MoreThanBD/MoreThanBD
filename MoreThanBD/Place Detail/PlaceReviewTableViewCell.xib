@@ -151,6 +151,7 @@
                 <outlet property="placeImageThreeView" destination="27r-8J-rmx" id="pDs-nN-kGi"/>
                 <outlet property="placeImageTwoView" destination="rv7-Kf-GIx" id="oVy-Gf-RNr"/>
                 <outlet property="reviewLabel" destination="IQW-GD-0nY" id="BEV-jO-Q8Q"/>
+                <outlet property="reviewerIcon" destination="zrC-Uq-xOz" id="8cb-Dd-5Ie"/>
                 <outlet property="reviewerName" destination="ldy-Vj-HJQ" id="wdf-PE-p1B"/>
                 <outlet property="starsCosmosView" destination="oGI-lB-9c8" id="lZ6-OV-Oqk"/>
             </connections>

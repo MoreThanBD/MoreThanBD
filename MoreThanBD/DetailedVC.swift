@@ -36,9 +36,24 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
         fetchReviews()
     }
     @IBAction func addComment(_ sender: Any) {
-        let addComment=storyboard?.instantiateViewController(identifier: "addCommentVC") as! AddCommentVC
-        navigationController?.pushViewController(addComment, animated: true)
-        }
+        guard let placeId = placeId else {return}
+        
+        let addComment=storyboard?.instantiateViewController(identifier: "NewPlaceVC") as! NewLocVC
+        
+        placesClient?.fetchPlace(fromPlaceID: placeId, placeFields: .all, sessionToken: nil, callback: { (place: GMSPlace?, error: Error?) in
+            
+            guard let place = place else{
+                print("Place still nil")
+                return
+            }
+            
+            addComment.name = place.name
+            addComment.place = place
+            self.navigationItem.title = place.name
+            self.navigationController?.pushViewController(addComment, animated: true)
+                                
+        })
+    }
     
     func fetchReviews() {
         guard let placeId = placeId else { return }
@@ -115,6 +130,7 @@ extension DetailedVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reviewCellId, for: indexPath) as! PlaceReviewTableViewCell
         let review = reviews[indexPath.row]
         cell.review = review
+        cell.setReviewInformation()
         return cell
     }
     
