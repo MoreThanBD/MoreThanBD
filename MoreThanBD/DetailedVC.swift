@@ -34,6 +34,7 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
         placesClient = GMSPlacesClient.shared()
         fetchImages()
         fetchReviews()
+        
     }
     @IBAction func addComment(_ sender: Any) {
         guard let placeId = placeId else {return}

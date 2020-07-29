@@ -49,7 +49,9 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     
     func goBack() {
         //go back to parent
-        self.navigationController?.popViewController(animated: true)
+        let vc=self.storyboard?.instantiateViewController(identifier: "explore") as! ViewController
+        //self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

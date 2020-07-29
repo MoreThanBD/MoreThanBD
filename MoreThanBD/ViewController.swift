@@ -11,6 +11,7 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 import FirebaseAuth
+import FirebaseFirestore
 
 struct Restaurant{
     var name:String?
@@ -24,19 +25,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addBtn: UIBarButtonItem!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
-    var locationManager: CLLocationManager?
+    let locationManager = CLLocationManager()
     
     //an array of restaurants that will be pinned on the map
     var places: [Restaurant]=[]
     
+    //07-29  loadMarkers
+    var marker_places=[Place]()//this array stores all the restaurants  added by our  users
+    var markers=[GMSMarker]()//this array stores all the markers of restaurants as GMSMarker
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager  = CLLocationManager()
+        //locationManager  = CLLocationManager()
         setupLocation()
         
         //conform to GMSMapViewDelegate for tapping on a marker
         mapView.delegate=self
         
+            //07-29 loadMarkers
+        //this function will add pins to the map
+        loadRestaurants()
         
         /*
         DispatchQueue.global(qos: .userInitiated).async {
@@ -50,21 +58,26 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.startUpdatingLocation()
+        //locationManager.requestAlwaysAuthorization()
+        
     }
 
     func setupLocation() {
-        locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.requestLocation()
-        guard let coordinate = locationManager?.location?.coordinate else {
+        print("setting up location")
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        //locationManager.requestAlwaysAuthorization()
+        //locationManager?.requestLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+        locationManager.startUpdatingLocation()
+        guard let coordinate = locationManager.location?.coordinate else {
             return
         }
         
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways) {
-            print("Permitted... ", locationManager?.location?.coordinate.latitude)
-            print("Permitted... ", locationManager?.location?.coordinate.longitude)
+            print("Permitted... ", locationManager.location?.coordinate.latitude)
+            print("Permitted... ", locationManager.location?.coordinate.longitude)
         }
         
         print(coordinate)
@@ -107,12 +120,45 @@ class ViewController: UIViewController {
     }
     
     func loadRestaurants(){
-        
+        self.mapView.clear()//clear up the mapView
+        Firestore.firestore().collection("reviews").getDocuments {[weak self] (snapshot, error) in
+            var places = [Place]()
+            var loadedMarkers=[GMSMarker]()
+            if let documents = snapshot?.documents {
+                for document in documents {
+                    let placeData = document.data()
+                    let place = Place.placeFromDictionary(dict: placeData)
+                    
+                    places.append(place)
+                    print("A place lat \(String(describing: place.lat))")
+                    
+                    let cord2D=CLLocationCoordinate2D(latitude: place.lat!, longitude: place.lng!)
+                    print("adding marker")
+                    let marker = GMSMarker()
+                    marker.position =  cord2D
+                    marker.title = "Location"
+                    marker.snippet = place.name
+                    
+                    let markerImage = UIImage(systemName: "star.fill")!
+                    let markerView = UIImageView(image: markerImage)
+                    marker.iconView=markerView
+                    marker.map=self?.mapView
+                    
+                    loadedMarkers.append(marker)
+                }
+                self?.marker_places = places
+                self?.markers=loadedMarkers
+            }
+        }
+        for p in self.marker_places{
+            print(p.name!)
+        }
+        print("count is\(self.marker_places.count)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.description as? PlaceListViewController {
-            destination.currentLocation = locationManager?.location
+            destination.currentLocation = locationManager.location
         }
     }
     
@@ -134,6 +180,7 @@ class ViewController: UIViewController {
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Place.currentLocation = locations.first
+        print(locations[0])
         if let loc = locations.first {
             zoomToLocation(coordinate: loc.coordinate)
         }
@@ -175,6 +222,7 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         print(place.coordinate.latitude)
         print(place.coordinate.longitude)
         
+        /*
         //append the new place to the places array
         var newRest = Restaurant(name:place.name,latitude: place.coordinate.latitude,longitude: place.coordinate.longitude,id:3)
         let newMarker = GMSMarker()
@@ -190,14 +238,32 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         
         //call loadPins to reload pins
         loadPins()
+ */
+        //07-29 existing or new
+        //check if the restaurant is already in the database
+        var index=0
+        var exist=false
+        for p in marker_places{
+            if (p.lat==place.coordinate.latitude&&p.lng==place.coordinate.longitude){
+                // this place is already added, go to detailed vc instead of newloc  vc
+                let restaurant = marker_places[index]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let detailVC = storyboard.instantiateViewController(identifier: "DetailedVC") as! DetailedVC
+                detailVC.placeId = restaurant.placeId
+                self.navigationController?.pushViewController(detailVC, animated: true)
+                exist=true
+            }
+            index+=1
+        }
         
-    
+        //this place is a new one, go to newloc vc
         //load the NewLocVC
+        if(!exist){
         let NVC =  storyboard?.instantiateViewController(withIdentifier: "NewPlaceVC") as! NewLocVC
         NVC.name=place.name
         NVC.place = place
         navigationController?.pushViewController(NVC, animated: true)
-        
+        }
         
         
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -216,6 +282,7 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
     }
     
     func loadPins(){
+        /*
         self.mapView.clear()//first clear the mapView
         
         for place in places{
@@ -236,14 +303,22 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         //will change this line to make the cameraPosition at the user's current location
         let location = CLLocationCoordinate2D(latitude: (places[0].latitude!), longitude: (places[0].longitude!))
         self.mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: 15)
+ */
         
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let DVC =  storyboard?.instantiateViewController(withIdentifier: "DetailedVC") as! DetailedVC
-        //DVC.name=marker.snippet
-        navigationItem.title=marker.snippet
-        navigationController?.pushViewController(DVC, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(identifier: "DetailedVC") as! DetailedVC
+        var index=0;
+        for m in markers{
+            if(m.position.latitude==marker.position.latitude&&m.position.longitude==marker.position.longitude){
+                print(index)
+                detailVC.placeId=marker_places[index].placeId
+            }
+            index+=1;
+        }
+        self.navigationController?.pushViewController(detailVC, animated: true)
         
         return true;
     }
