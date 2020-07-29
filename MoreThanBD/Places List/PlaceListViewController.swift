@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import FirebaseFirestore
 
-class PlaceListViewController: UIViewController,CLLocationManagerDelegate{
+class PlaceListViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
     var places: [Place] = []
@@ -19,21 +19,11 @@ class PlaceListViewController: UIViewController,CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        //07-29
-        locationM.delegate=self
-        locationM.requestLocation()
-        currentLocation=locationM.location
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchPlaces()
-    }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation=locations[0]
-    }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
     }
     
     func setupTableView() {
@@ -70,6 +60,7 @@ extension PlaceListViewController: UITableViewDataSource {
         //07-29
         //set the  distance variable before the cell's place  is set!!!
         let targatLocation=CLLocation(latitude: place.lat ?? 0, longitude: place.lng ?? 0)
+        //cell.distance=currentLocation?.distance(from: targatLocation)
         cell.distance=(currentLocation?.distance(from: targatLocation) as! Double)/1609
         cell.place = place
         

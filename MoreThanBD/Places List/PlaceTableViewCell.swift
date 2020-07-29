@@ -17,7 +17,7 @@ class PlaceTableViewCell: UITableViewCell {
     @IBOutlet weak var placeImageView: UIImageView!
     @IBOutlet weak var averageRatingLabel: UILabel!
     
-    var distance:Double=0;
+    var distance:Double?;
  
     static let NIB_NAME = "PlaceTableViewCell"
     
@@ -26,9 +26,10 @@ class PlaceTableViewCell: UITableViewCell {
             guard let place = self.place else { return }
             nameLabel.text = place.name
             ratingView.rating = Double(place.averageRating ?? 0)
-            
-            let distanceInMiles="\(String(format: "%f", distance)) mi"
+            if let d=distance{
+            let distanceInMiles="\(String(format: "%f", d )) mi"
             distanceLabel.text=distanceInMiles
+            }
             //distanceLabel.text = String(format: "%.1f mi", place.distanceAway ?? 0)
             averageRatingLabel.text = String(format: "%0.1f", place.averageRating ?? 0)
             if let imageUrlString = place.placeImageString, let url = URL(string: imageUrlString) {

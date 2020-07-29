@@ -157,8 +157,10 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.description as? PlaceListViewController {
+        if let destination = segue.destination as? PlaceListViewController {
             destination.currentLocation = locationManager.location
+            print("!!!!!!!!!!!!")
+            print(destination.currentLocation ?? "nothing")
         }
     }
     
