@@ -29,7 +29,7 @@ class StartVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        authenticateAndConfigureWindow()
+        //authenticateAndConfigureWindow()
     }
 
     func authenticateAndConfigureWindow() {

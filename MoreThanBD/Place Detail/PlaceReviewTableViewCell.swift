@@ -80,6 +80,7 @@ class PlaceReviewTableViewCell: UITableViewCell {
         reviewLabel.text = thisReview.review
         
         //laod images off main thread to load the cell faster
+        /*
         if thisReview.images.count > 0{
             let httpsReference = self.storage.reference(forURL: thisReview.images[0])
             
@@ -131,6 +132,7 @@ class PlaceReviewTableViewCell: UITableViewCell {
                 }
             }
         }
+ */
     }
     
 }
