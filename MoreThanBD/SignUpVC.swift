@@ -88,13 +88,16 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     func goToHomeScreen(){
         //after validation,call this function to make the Explore Page the rootViewController
-        let homeTabVarViewController=storyboard?.instantiateViewController(identifier: "Home") as! myTabController
+        let homeTabVarViewController=storyboard?.instantiateViewController(identifier: "explore") as! ViewController
+        
+        let navVC = UINavigationController(rootViewController: homeTabVarViewController)
         
         //homeTabVarViewController.username="username"
         
-        view.window?.rootViewController=homeTabVarViewController
+        view.window?.rootViewController=navVC
         view.window?.makeKeyAndVisible()
     }
+    
     
     func validateEmail() -> Bool {
         guard let email = emailField.text else{

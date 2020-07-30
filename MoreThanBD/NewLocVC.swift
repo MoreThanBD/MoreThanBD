@@ -15,7 +15,7 @@ import FirebaseAuth
 import GooglePlaces
 import Cosmos
 
-class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
+class NewLocVC: BaseViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
     
     @IBOutlet weak var locationTitleLabel: UILabel!
     @IBOutlet weak var starsCosmosView: CosmosView!
@@ -23,6 +23,7 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     
     @IBOutlet weak var theTextView: UITextView!
     @IBOutlet weak var addPlaceBtn: UIButton!
+    @IBOutlet weak var addFromCameraButton: UIButton!
     
     var parentScene:UIViewController?
     var name:String?
@@ -89,6 +90,14 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
  
     }
     
+    @IBAction func uploadFromCamera(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.sourceType = .camera
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
     func getAllImages() -> Void {
 
         print("get all images method called here")
@@ -130,11 +139,19 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
         textView.text = "Click here to add some comment"
         textView.textColor = UIColor.lightGray
         
+        
         addPlaceBtn.layer.cornerRadius=15;
         addPlaceBtn.layer.backgroundColor=UIColor.systemGray6.cgColor
         
+        /*
+        
+        addFromCameraButton.layer.cornerRadius=15;
+        addFromCameraButton.layer.backgroundColor=UIColor.systemGray6.cgColor
+        
         uploadImageBtn.layer.cornerRadius=15;
         uploadImageBtn.layer.backgroundColor=UIColor.systemGray6.cgColor
+ 
+ */
         
         theTextView.layer.cornerRadius=20
         theTextView.layer.backgroundColor=UIColor.systemGray6.cgColor
@@ -171,10 +188,21 @@ class NewLocVC: UIViewController,UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
+        
+        uploadedImages.append(image)
+        
+        imageView1.image=uploadedImages[0]
+            if uploadedImages.count>1{
+                imageView2.image=uploadedImages[1]
+            }
+            if uploadedImages.count>2{
+                imageView3.image=uploadedImages[2]
+            }
+            if uploadedImages.count==4{
+                imageView4.image=uploadedImages[3]
+        }
 
         dismiss(animated: true)
-        //imageView1.image=image
-        //uploadedImages.append(image)
     }
     
     func pushData(){

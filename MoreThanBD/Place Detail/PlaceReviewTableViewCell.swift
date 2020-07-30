@@ -9,6 +9,7 @@
 import UIKit
 import Cosmos
 import FirebaseStorage
+import QuickLook
 
 class PlaceReviewTableViewCell: UITableViewCell {
     let storage = Storage.storage()
@@ -21,6 +22,8 @@ class PlaceReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var placeImageTwoView: UIImageView!
     @IBOutlet weak var placeImageThreeView: UIImageView!
     @IBOutlet weak var placeImageFourView: UIImageView!
+    
+    var previewImages:  ([UIImage]) -> Void = { _ in}
     
     var review:Review? {
         didSet {
@@ -42,8 +45,23 @@ class PlaceReviewTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openImage))
+        self.contentView.addGestureRecognizer(tapGestureRecognizer)
+        
+        
+        /*[placeImageOneView, placeImageTwoView, placeImageThreeView, placeImageFourView].forEach {[weak self] (imageView) in
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openImage))
+            imageView?.addGestureRecognizer(tapGestureRecognizer)
+        }*/
     }
-
+    
+    @objc func openImage() {
+        let images = [placeImageOneView, placeImageTwoView, placeImageThreeView, placeImageFourView].compactMap({$0?.image})
+        previewImages(images)
+        
+    }
+    
+   
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

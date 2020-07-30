@@ -10,8 +10,9 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import FirebaseFirestore
+import QuickLook
 
-class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
+class DetailedVC: BaseViewController,UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var reviewsTableView: UITableView!
@@ -23,6 +24,8 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
     var reviews: [Review] = []
     
     var images:[UIImage?]=[]
+    
+    var imagesToPreview: [UIImage] = []
     
     private var placesClient: GMSPlacesClient!
     
@@ -55,6 +58,14 @@ class DetailedVC: UIViewController,UICollectionViewDelegateFlowLayout {
                                 
         })
     }
+    
+    func openImage(images: [UIImage]) {
+    self.imagesToPreview = images
+       let previewVC = QLPreviewController()
+       //previewVC.dataSource = self
+       //present(previewVC, animated: true, completion: nil)
+    }
+
     
     func fetchReviews() {
         guard let placeId = placeId else { return }
@@ -131,6 +142,7 @@ extension DetailedVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reviewCellId, for: indexPath) as! PlaceReviewTableViewCell
         let review = reviews[indexPath.row]
         cell.review = review
+        cell.previewImages = openImage(images:)
         cell.setReviewInformation()
         return cell
     }
@@ -172,4 +184,16 @@ extension DetailedVC:UICollectionViewDelegate,UICollectionViewDataSource{
         return CGSize(width:80,height:100)
     }
     
+}
+
+extension DetailedVC: QLPreviewControllerDataSource {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return imagesToPreview.count
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let imageToPreview = imagesToPreview[index]
+        //QLPreviewItem(
+        return imageToPreview as! QLPreviewItem
+    }
 }
