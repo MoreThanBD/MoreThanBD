@@ -53,7 +53,7 @@ class DetailedVC: BaseViewController,UICollectionViewDelegateFlowLayout {
             
             addComment.name = place.name
             addComment.place = place
-            self.navigationItem.title = place.name
+            //self.navigationItem.title = place.name
             self.navigationController?.pushViewController(addComment, animated: true)
                                 
         })

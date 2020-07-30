@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         
         //conform to GMSMapViewDelegate for tapping on a marker
         mapView.delegate=self
+        mapView.isMyLocationEnabled=true
+        mapView.settings.myLocationButton=true;
         
             //07-29 loadMarkers
         //this function will add pins to the map

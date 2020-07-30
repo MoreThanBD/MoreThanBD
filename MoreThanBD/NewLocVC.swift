@@ -132,7 +132,8 @@ class NewLocVC: BaseViewController,UIImagePickerControllerDelegate, UINavigation
         //placeName.text=name
         textView.delegate=self
 
-        locationTitleLabel.text = place?.name
+        //locationTitleLabel.text = place?.name
+        self.navigationItem.title=place?.name
         setStyle()
     }
     func setStyle(){

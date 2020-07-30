@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import FirebaseFirestore
 
-class PlaceListViewController: UIViewController{
+class PlaceListViewController: UIViewController,CLLocationManagerDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     var places: [Place] = []
@@ -18,7 +18,15 @@ class PlaceListViewController: UIViewController{
     let locationM=CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //set the CLLocationManagerDelegate
+        locationM.delegate=self
+        locationM.requestWhenInUseAuthorization()
+        locationM.startUpdatingLocation()
         setupTableView()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation=locations[0]
     }
     
     override func viewWillAppear(_ animated: Bool) {

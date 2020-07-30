@@ -27,13 +27,16 @@ class PlaceTableViewCell: UITableViewCell {
             nameLabel.text = place.name
             ratingView.rating = Double(place.averageRating ?? 0)
             if let d=distance{
-            let distanceInMiles="\(String(format: "%0.1f", d )) mi"
+            let distanceInMiles="\(String(format: "%0.2f", d )) mi"
             distanceLabel.text=distanceInMiles
             }
             //distanceLabel.text = String(format: "%.1f mi", place.distanceAway ?? 0)
             averageRatingLabel.text = String(format: "%0.1f", place.averageRating ?? 0)
             if let imageUrlString = place.placeImageString, let url = URL(string: imageUrlString) {
                 placeImageView.sd_setImage(with: url, placeholderImage: nil)
+            }
+            else{
+                placeImageView.image=UIImage(systemName: "camera")
             }
             //placeImageView.image = place.placeImage
         }
