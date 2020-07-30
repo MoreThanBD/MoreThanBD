@@ -11,7 +11,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var signIn_btn: UIStackView!
+
+    @IBOutlet weak var signIn_btn: UIButton!
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -65,7 +66,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                 
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                //self.present(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

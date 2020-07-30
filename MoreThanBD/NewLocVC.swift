@@ -268,38 +268,7 @@ class NewLocVC: BaseViewController,UIImagePickerControllerDelegate, UINavigation
                 completion(false)
             }
         }
-        
-        
-        /*
-        
-        Firestore.firestore().collection("reviews").document(placeId).updateData(["userreviews" : FieldValue.arrayUnion([reviewData])]) { (error) in
-            if error == nil {
-                print("UPloaded Review...")
-                Firestore.firestore().collection("reviews").document(placeId).setData(placeData)
-                completion(true)
-            } else if error!.localizedDescription.contains("No document to update") {
-                placeData["userreviews"] = FieldValue.arrayUnion([reviewData])
-                Firestore.firestore().collection("reviews").document(placeId).setData(placeData) { (error) in
-                    if error == nil {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                }
-            }
-        }
- 
- */
-       /*
-        Firestore.firestore().collection("reviews").document(placeId).collection("userreviews").document(userId).setData(reviewData) { (error) in
-            if error == nil {
-                print("UPloaded Review...")
-                Firestore.firestore().collection("reviews").document(placeId).setData(placeData)
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }*/
+
     }
 }
 

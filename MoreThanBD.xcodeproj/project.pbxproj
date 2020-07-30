@@ -37,8 +37,6 @@
 		E08EE10324C335280090C180 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EE10224C335280090C180 /* LogInVC.swift */; };
 		E08EE10524C344310090C180 /* DetailedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EE10424C344310090C180 /* DetailedVC.swift */; };
 		E08EE10724C344510090C180 /* NewLocVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EE10624C344510090C180 /* NewLocVC.swift */; };
-		E08EE10924C344950090C180 /* AddCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EE10824C344950090C180 /* AddCommentVC.swift */; };
-		E08EE10B24C344AD0090C180 /* FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EE10A24C344AD0090C180 /* FavoriteVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,8 +73,6 @@
 		E08EE10224C335280090C180 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		E08EE10424C344310090C180 /* DetailedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVC.swift; sourceTree = "<group>"; };
 		E08EE10624C344510090C180 /* NewLocVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocVC.swift; sourceTree = "<group>"; };
-		E08EE10824C344950090C180 /* AddCommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentVC.swift; sourceTree = "<group>"; };
-		E08EE10A24C344AD0090C180 /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
 		F9F8A5B286B7F19AEEE74563 /* Pods-MoreThanBD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoreThanBD.debug.xcconfig"; path = "Target Support Files/Pods-MoreThanBD/Pods-MoreThanBD.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,8 +183,6 @@
 				E08EE10224C335280090C180 /* LogInVC.swift */,
 				E08EE10424C344310090C180 /* DetailedVC.swift */,
 				E08EE10624C344510090C180 /* NewLocVC.swift */,
-				E08EE10824C344950090C180 /* AddCommentVC.swift */,
-				E08EE10A24C344AD0090C180 /* FavoriteVC.swift */,
 				E00EFCD124C6C2B600C4424D /* DetailedVCImageCell.swift */,
 				E00EFCD524C71BD400C4424D /* myTabController.swift */,
 				725A036424C80EFB00B83C37 /* FirebaseAuthManager.swift */,
@@ -337,7 +331,6 @@
 				C0DFCAEA24C5F76E004DF240 /* PlaceListViewController.swift in Sources */,
 				E08EE10524C344310090C180 /* DetailedVC.swift in Sources */,
 				E08EE0FF24C334D80090C180 /* StartVC.swift in Sources */,
-				E08EE10B24C344AD0090C180 /* FavoriteVC.swift in Sources */,
 				725A036724C9E91100B83C37 /* PasswordResetVC.swift in Sources */,
 				C037725924CF808E00C288F6 /* BaseViewController.swift in Sources */,
 				E00EFCD224C6C2B600C4424D /* DetailedVCImageCell.swift in Sources */,
@@ -346,7 +339,6 @@
 				E08EE0EC24C3343F0090C180 /* ViewController.swift in Sources */,
 				E08EE10724C344510090C180 /* NewLocVC.swift in Sources */,
 				C0DFCAF524C60A70004DF240 /* PlaceReviewTableViewCell.swift in Sources */,
-				E08EE10924C344950090C180 /* AddCommentVC.swift in Sources */,
 				C0DFCAF924C6653E004DF240 /* GoogleAPIHelper.swift in Sources */,
 				C0DFCAFB24C6656B004DF240 /* GoogleAPIHelper+Nearby.swift in Sources */,
 				E00EFCD624C71BD400C4424D /* myTabController.swift in Sources */,

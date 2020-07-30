@@ -61,7 +61,7 @@ class DetailedVC: BaseViewController,UICollectionViewDelegateFlowLayout {
     
     func openImage(images: [UIImage]) {
     self.imagesToPreview = images
-       let previewVC = QLPreviewController()
+       //let previewVC = QLPreviewController()
        //previewVC.dataSource = self
        //present(previewVC, animated: true, completion: nil)
     }

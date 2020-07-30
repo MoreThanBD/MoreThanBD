@@ -48,14 +48,6 @@ class ViewController: UIViewController {
         //this function will add pins to the map
         loadRestaurants()
         
-        /*
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.loadRestaurants()//this function will load the restaurant's informationinto var places
-            DispatchQueue.main.async {
-                self.loadPins()
-            }
-        }
- */
 
     }
     
@@ -76,14 +68,8 @@ class ViewController: UIViewController {
         guard let coordinate = locationManager.location?.coordinate else {
             return
         }
-        
-        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways) {
-            print("Permitted... ", locationManager.location?.coordinate.latitude)
-            print("Permitted... ", locationManager.location?.coordinate.longitude)
-        }
-        
-        print(coordinate)
-        //zoomToLocation(coordinate: coordinate)
+
+        zoomToLocation(coordinate: coordinate)
         
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -94,9 +80,9 @@ class ViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 15)
         //mapView.camera = camera
         mapView.animate(to: camera)
-        fetchRestaurants(around: coordinate)
+        //fetchRestaurants(around: coordinate)
     }
-    
+    //this function is never used
     func fetchRestaurants(around location: CLLocationCoordinate2D) {
         var input = GInput()
         input.keyword = "Restaurant"
@@ -132,10 +118,10 @@ class ViewController: UIViewController {
                     let place = Place.placeFromDictionary(dict: placeData)
                     
                     places.append(place)
-                    print("A place lat \(String(describing: place.lat))")
+                    //print("A place lat \(String(describing: place.lat))")
                     
                     let cord2D=CLLocationCoordinate2D(latitude: place.lat!, longitude: place.lng!)
-                    print("adding marker")
+                    //print("adding marker")
                     let marker = GMSMarker()
                     marker.position =  cord2D
                     marker.title = "Location"
@@ -152,17 +138,15 @@ class ViewController: UIViewController {
                 self?.markers=loadedMarkers
             }
         }
-        for p in self.marker_places{
-            print(p.name!)
-        }
-        print("count is\(self.marker_places.count)")
+
+        //print("count is\(self.marker_places.count)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PlaceListViewController {
             destination.currentLocation = locationManager.location
-            print("!!!!!!!!!!!!")
-            print(destination.currentLocation ?? "nothing")
+            //print("!!!!!!!!!!!!")
+            //print(destination.currentLocation ?? "nothing")
         }
     }
     
@@ -184,11 +168,11 @@ class ViewController: UIViewController {
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Place.currentLocation = locations.first
-        print(locations[0])
+        //print(locations[0])
         if let loc = locations.first {
             zoomToLocation(coordinate: loc.coordinate)
         }
-        print("Updating... ", locations.first)
+        //print("Updating... ", locations.first)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -220,29 +204,6 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
             print("Place name: \(String(describing: place.name))")
             dismiss(animated: true, completion: nil)
             
-            //self.mapView.clear()
-            
-        let cord2D = CLLocationCoordinate2D(latitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude))
-        print(place.coordinate.latitude)
-        print(place.coordinate.longitude)
-        
-        /*
-        //append the new place to the places array
-        var newRest = Restaurant(name:place.name,latitude: place.coordinate.latitude,longitude: place.coordinate.longitude,id:3)
-        let newMarker = GMSMarker()
-                   newMarker.position = cord2D
-                   newMarker.title = "Location"
-                   newMarker.snippet = place.name
-                   
-                   let markerImage = UIImage(systemName: "star.fill")!
-                   let markerView = UIImageView(image: markerImage)
-                   newMarker.iconView=markerView
-        newRest.marker=newMarker
-        places.append(newRest)
-        
-        //call loadPins to reload pins
-        loadPins()
- */
         //07-29 existing or new
         //check if the restaurant is already in the database
         var index=0
@@ -269,11 +230,6 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         navigationController?.pushViewController(NVC, animated: true)
         }
         
-        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let detailVC = storyboard.instantiateViewController(identifier: "DetailedVC") as! DetailedVC
-//        detailVC.place = place
-//        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -285,31 +241,6 @@ extension ViewController:GMSAutocompleteViewControllerDelegate,GMSMapViewDelegat
         dismiss(animated: true, completion: nil)
     }
     
-    func loadPins(){
-        /*
-        self.mapView.clear()//first clear the mapView
-        
-        for place in places{
-            
-            let cord2D = CLLocationCoordinate2D(latitude: (place.latitude!), longitude: (place.longitude!))
-            let marker = GMSMarker()
-            marker.position =  cord2D
-            marker.title = "Location"
-            marker.snippet = place.name
-            
-            let markerImage = UIImage(systemName: "star.fill")!
-            let markerView = UIImageView(image: markerImage)
-            marker.iconView=markerView
-            marker.map=self.mapView
-        }
-        
-        /**************/
-        //will change this line to make the cameraPosition at the user's current location
-        let location = CLLocationCoordinate2D(latitude: (places[0].latitude!), longitude: (places[0].longitude!))
-        self.mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: 15)
- */
-        
-    }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
