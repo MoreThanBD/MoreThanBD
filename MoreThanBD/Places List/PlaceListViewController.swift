@@ -70,7 +70,7 @@ extension PlaceListViewController: UITableViewDataSource {
         let targatLocation=CLLocation(latitude: place.lat ?? 0, longitude: place.lng ?? 0)
         //cell.distance=currentLocation?.distance(from: targatLocation)
         guard let currentLocation = currentLocation else { return cell }
-        let d=(currentLocation?.distance(from: targatLocation) ?? 0) as Double
+        let d=(currentLocation.distance(from: targatLocation)) as Double
         cell.distance=(d)/1609
         cell.place = place
         

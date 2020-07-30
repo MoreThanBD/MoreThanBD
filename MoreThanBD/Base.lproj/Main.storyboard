@@ -41,12 +41,19 @@
                                     <constraint firstItem="qf7-4Y-csn" firstAttribute="height" secondItem="1b6-0Q-ga5" secondAttribute="height" id="yRj-9u-xhK"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image-1" translatesAutoresizingMaskIntoConstraints="NO" id="ckg-9E-rmR">
+                                <rect key="frame" x="67" y="261" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="PlI-yc-SNC" firstAttribute="bottom" secondItem="ckg-9E-rmR" secondAttribute="bottom" constant="389" id="7IR-QH-8gX"/>
                             <constraint firstItem="PlI-yc-SNC" firstAttribute="bottom" secondItem="ft2-Ur-tf9" secondAttribute="bottom" constant="100" id="8Jw-Ro-dkd"/>
                             <constraint firstItem="PlI-yc-SNC" firstAttribute="trailing" secondItem="ft2-Ur-tf9" secondAttribute="trailing" constant="40" id="DEf-eW-ZNL"/>
                             <constraint firstItem="ft2-Ur-tf9" firstAttribute="leading" secondItem="PlI-yc-SNC" secondAttribute="leading" constant="40" id="Jnl-rp-1hJ"/>
+                            <constraint firstItem="ckg-9E-rmR" firstAttribute="top" secondItem="PlI-yc-SNC" secondAttribute="top" constant="173" id="ZJS-LS-S1Y"/>
+                            <constraint firstItem="PlI-yc-SNC" firstAttribute="trailing" secondItem="ckg-9E-rmR" secondAttribute="trailing" constant="68" id="bbl-jg-Iku"/>
+                            <constraint firstItem="ckg-9E-rmR" firstAttribute="leading" secondItem="PlI-yc-SNC" secondAttribute="leading" constant="67" id="pwJ-4f-YHT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PlI-yc-SNC"/>
                     </view>
@@ -82,7 +89,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yX6-HK-3mV">
                                         <rect key="frame" x="0.0" y="70" width="295" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75c-gI-3ux">
                                         <rect key="frame" x="0.0" y="140" width="295" height="50"/>
@@ -193,7 +200,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydC-Qf-kVN">
                                         <rect key="frame" x="0.0" y="70" width="295" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-BN-WRE">
                                         <rect key="frame" x="0.0" y="140" width="295" height="50"/>
@@ -718,6 +725,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image-1" width="352" height="264"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
     </resources>
 </document>
