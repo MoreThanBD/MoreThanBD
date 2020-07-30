@@ -27,7 +27,7 @@ class PlaceTableViewCell: UITableViewCell {
             nameLabel.text = place.name
             ratingView.rating = Double(place.averageRating ?? 0)
             if let d=distance{
-            let distanceInMiles="\(String(format: "%f", d )) mi"
+            let distanceInMiles="\(String(format: "%0.1f", d )) mi"
             distanceLabel.text=distanceInMiles
             }
             //distanceLabel.text = String(format: "%.1f mi", place.distanceAway ?? 0)
